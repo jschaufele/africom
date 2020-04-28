@@ -1,0 +1,26 @@
+{
+	"name": "africom",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"start": "func start",
+		"test": "echo \"No tests yet...\""
+	},
+	"dependencies": {
+		"@microsoft/microsoft-graph-client": "^2.0.0",
+		"adal-node": "^0.2.1",
+		"applicationinsights": "^1.7.4",
+		"axios": "^0.19.2",
+		"axios-mock-adapter": "^1.18.1",
+		"azure-function-log-intercept": "^1.0.4",
+		"dotenv": "^8.2.0",
+		"es6-promise": "^4.2.8",
+		"isomorphic-fetch": "^2.2.1",
+		"lodash": "^4.17.15",
+		"moment": "^2.24.0",
+		"moment-timezone": "^0.5.28"
+	},
+	"devDependencies": {
+		"axios-mock-adapter": "^1.18.1"
+	}
+}
