@@ -1,0 +1,18 @@
+{
+    "sourceDirectory": "src",
+    "sharePointSiteUrl": "https://portal.usafricom.mil/tools/Sandbox",
+    "workspaceRoot": "c:\\projects\\carousel",
+    "publishWorkspaceOptions": {
+        "destinationFolder": "/",
+        "globPattern": "c:\\projects\\carousel\\src\\**\\*.*",
+        "localRoot": "c:\\projects\\carousel\\src"
+    },
+    "publishingScope": "SaveOnly",
+    "authenticationType": "ADFS",
+    "authenticationDetails": {
+        "username":"jack.l.schaufele.ctr@mail.mil",
+        "relyingParty": "urn:usafricom:portal",
+        "adfsUrl": "https://sts.acdde.mil/adfs/ls/wia?wa=wsignin1.0&wtrealm=urn%3ausafricom%3aportal&wctx=https%3a%2f%2fportal.usafricom.mil%2ftools%2fSandbox%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252Ftools%252FSandbox%252FSitePages%252FHome%252Easpx"
+    }
+
+}

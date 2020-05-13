@@ -1,0 +1,86 @@
+usafricom.define([
+    'require',
+    'jquery',
+    'spServices',
+    'moment',
+	'bootstrap-sp',
+    '_handlebarViewer/modules/handlebarViewer',
+    '_handlebarViewer/modules/listDataSource'], 
+    function (require, $, sps, moment, bootstrap, handlebarViewer, listDataSource) {
+
+    usafricom.loadCssFromPath("_controls", "/css/personnelSupport.css");
+    usafricom.loadCssFromPath("@font-awesome", "/css/font-awesome.min.css");
+
+    function personnelSupport(divSelector, listWeb, inprocessingList, currentList, outprocessingList, template) {
+    
+    	// TODO: combine css files for landing page (ex. panel-header)
+    	// TODO: Add an Order field
+    	// TODO: Use bootstrap instead of table in template
+        
+        var inprocessingDataSource = new listDataSource({
+        	name: "Arriving",
+        	listName: inprocessingList,
+        	webUrl: listWeb,
+        	camlConstraint: "<Eq><FieldRef Name=\"PromoteToHomepage\"/><Value Type=\"Boolean\">1</Value></Eq>",
+        	postProcessItemFunction: function(item) {
+				var url = item.URL;
+				if (url) {
+					var urlSplit = url.split(", ");
+					item.Title = urlSplit[1];
+					item.URL = urlSplit[0];
+				}
+			} 
+        });
+        
+        var currentDataSource = new listDataSource({
+        	name: "Current",
+        	listName: currentList,
+        	webUrl: listWeb,
+        	camlConstraint: "<Eq><FieldRef Name=\"PromoteToHomepage\"/><Value Type=\"Boolean\">1</Value></Eq>",
+        	postProcessItemFunction: function(item) {
+				var url = item.URL;
+				if (url) {
+					var urlSplit = url.split(", ");
+					item.Title = urlSplit[1];
+					item.URL = urlSplit[0];
+				}
+			} 
+        });
+        
+        var outprocessingDataSource = new listDataSource({
+        	name: "Departing",
+        	listName: outprocessingList,
+        	webUrl: listWeb,
+        	camlConstraint: "<Eq><FieldRef Name=\"PromoteToHomepage\"/><Value Type=\"Boolean\">1</Value></Eq>",
+        	postProcessItemFunction: function(item) {
+				var url = item.URL;
+				if (url) {
+					var urlSplit = url.split(", ");
+					item.Title = urlSplit[1];
+					item.URL = urlSplit[0];
+				}
+			} 
+        });
+
+
+        
+        var templateUrl = template ? require.toUrl("_handlebarViewer") + "/templates/" + viewerParams.template :
+						require.toUrl("_handlebarViewer") + "/templates/personnelSupportTemplate.html";
+
+        var personnelSupportViewer = new handlebarViewer({
+        	dataSources: [inprocessingDataSource, currentDataSource, outprocessingDataSource],
+        	viewerDivSelector: divSelector,
+        	templateUrl: templateUrl,
+        	_metadata: {
+        		arrivingUrl: "/info/Pages/Arriving%20Personnel.aspx",
+        		arrivingImgPath: require.toUrl("@images") + "/arrivingPersonnel.jpg",
+        		currentUrl: "/info/Pages/Current%20Personnel.aspx",
+        		currentImgPath: require.toUrl("@images") + "/currentPersonnel.jpg",	
+        		departingUrl: "/info/Pages/Departing%20Personnel.aspx",
+        		departingImgPath: require.toUrl("@images") + "/departingPersonnel.jpg",
+        	}
+       	});
+    }
+
+    return personnelSupport;
+});
